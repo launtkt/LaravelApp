@@ -1,195 +1,389 @@
-{{-- filepath: resources/views/layouts/admin.blade.php --}}
 @php
     $dashboardActive = request()->routeIs('admin.dashboard');
-    $productActive = request()->routeIs('admin.products.*');
-    $accountActive = request()->routeIs('admin.accounts.*');
-    $newsActive = request()->routeIs('admin.news.*');
+    $productActive = request()->routeIs('admin.products.*') || request()->routeIs('admin.images.*');
+    $userActive = request()->routeIs('admin.users.*');
+    $voucherActive = request()->routeIs('admin.vouchers.*');
     $categoryActive = request()->routeIs('admin.categories.*');
     $orderActive = request()->routeIs('admin.orders.*');
-    $customerActive = request()->routeIs('admin.customers.*');
+    $commentActive = request()->routeIs('admin.comments.*');
+    $reviewActive = request()->routeIs('admin.reviews.*');
 @endphp
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Layout</title>
+    <title>Admin Panel | Mova</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS + Icons -->
+
+    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/content.css') }}">
+    <!-- CSS Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- JS Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- Custom màu theo logo -->
+
 </head>
+
 <body>
     <div class="container-fluid">
-        <div class="row min-vh-100">
+        <div class="d-flex min-vh-100">
             <!-- Sidebar -->
-            <nav class="col-md-2 d-none d-md-block bg-dark sidebar p-0">
-                <div class="d-flex align-items-center justify-content-center p-3">
-                    <span class="fs-5 fw-bold text-white">Admin</span>
+            <nav class="d-none d-md-block sidebar p-0" style="min-width: 250px;">
+                <div class="text-center py-3" style="background-color: var(--background-color);">
+                    <img src="{{ asset('storage/avatars/logo1.png') }}" alt="Logo" style="height: 90px;">
                 </div>
                 <hr class="border-light m-0">
-                <div class="accordion bg-dark" id="sidebarMenu">
+                <div class="accordion" id="sidebarMenu">
+
                     <!-- Tổng quan -->
-                    <div class="accordion-item bg-dark border border-secondary rounded mb-2">
+                    <div class="accordion-item rounded mb-2">
                         <h2 class="accordion-header">
-                            <button class="accordion-button bg-dark text-white py-2 text-truncate w-100{{ $dashboardActive ? '' : ' collapsed' }}"
+                            <button
+                                class="accordion-button py-2 text-truncate w-100{{ $dashboardActive ? '' : ' collapsed' }}"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseDashboard"
                                 aria-expanded="{{ $dashboardActive ? 'true' : 'false' }}">
-                                <span title="Tổng quan">🏠 Tổng quan</span>
+                                🏠 Tổng quan
                             </button>
                         </h2>
-                        <div id="collapseDashboard" class="accordion-collapse collapse{{ $dashboardActive ? ' show' : '' }}" data-bs-parent="#sidebarMenu">
+                        <div id="collapseDashboard"
+                            class="accordion-collapse collapse{{ $dashboardActive ? ' show' : '' }}"
+                            data-bs-parent="#sidebarMenu">
                             <div class="accordion-body p-0">
-                                <a href="{{ route('admin.dashboard') }}" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Trang tổng quan">
-                                    Trang tổng quan
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="d-block py-2 px-4 text-decoration-none w-100 {{ request()->routeIs('admin.dashboard') ? 'active-link' : '' }}">
+                                    Tổng quan
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <!-- Quản lý sản phẩm -->
-                    <div class="accordion-item bg-dark border border-secondary rounded mb-2">
+
+                    <!-- Danh mục -->
+                    <div class="accordion-item rounded mb-2">
                         <h2 class="accordion-header">
-                            <button class="accordion-button bg-dark text-white py-2 text-truncate w-100{{ $productActive ? '' : ' collapsed' }}"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseProduct"
-                                aria-expanded="{{ $productActive ? 'true' : 'false' }}">
-                                <span title="Quản lý sản phẩm">📦 Quản lý sản phẩm</span>
-                            </button>
-                        </h2>
-                        <div id="collapseProduct" class="accordion-collapse collapse{{ $productActive ? ' show' : '' }}" data-bs-parent="#sidebarMenu">
-                            <div class="accordion-body p-0">
-                                <a href="{{ route('admin.products.index') }}" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Danh sách sản phẩm">Danh sách sản phẩm</a>
-                                <a href="{{ route('admin.images.index') }}" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Danh sách ảnh sản phẩm">Danh sách ảnh sản phẩm</a>
-                                <a href="{{ route('admin.products.create') }}" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Thêm sản phẩm">Thêm sản phẩm</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Quản lý tài khoản -->
-                    <div class="accordion-item bg-dark border border-secondary rounded mb-2">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button bg-dark text-white py-2 text-truncate w-100{{ $accountActive ? '' : ' collapsed' }}"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseAccount"
-                                aria-expanded="{{ $accountActive ? 'true' : 'false' }}">
-                                <span title="Quản lý tài khoản">👤 Quản lý tài khoản</span>
-                            </button>
-                        </h2>
-                        <div id="collapseAccount" class="accordion-collapse collapse{{ $accountActive ? ' show' : '' }}" data-bs-parent="#sidebarMenu">
-                            <div class="accordion-body p-0">
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Danh sách tài khoản">Danh sách tài khoản</a>
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Thêm tài khoản">Thêm tài khoản</a>
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Phân quyền">Phân quyền</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Quản lý tin tức -->
-                    <div class="accordion-item bg-dark border border-secondary rounded mb-2">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button bg-dark text-white py-2 text-truncate w-100{{ $newsActive ? '' : ' collapsed' }}"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseNews"
-                                aria-expanded="{{ $newsActive ? 'true' : 'false' }}">
-                                <span title="Quản lý tin tức">📰 Quản lý tin tức</span>
-                            </button>
-                        </h2>
-                        <div id="collapseNews" class="accordion-collapse collapse{{ $newsActive ? ' show' : '' }}" data-bs-parent="#sidebarMenu">
-                            <div class="accordion-body p-0">
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Danh sách tin">Danh sách tin</a>
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Thêm bài viết">Thêm bài viết</a>
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Chuyên mục tin">Chuyên mục tin</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Quản lý danh mục -->
-                    <div class="accordion-item bg-dark border border-secondary rounded mb-2">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button bg-dark text-white py-2 text-truncate w-100{{ $categoryActive ? '' : ' collapsed' }}"
+                            <button
+                                class="accordion-button py-2 text-truncate w-100{{ $categoryActive ? '' : ' collapsed' }}"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory"
                                 aria-expanded="{{ $categoryActive ? 'true' : 'false' }}">
-                                <span title="Quản lý danh mục">🗂️ Quản lý danh mục</span>
+                                🗂️ Quản lý danh mục
                             </button>
                         </h2>
-                        <div id="collapseCategory" class="accordion-collapse collapse{{ $categoryActive ? ' show' : '' }}" data-bs-parent="#sidebarMenu">
+                        <div id="collapseCategory"
+                            class="accordion-collapse collapse{{ $categoryActive ? ' show' : '' }}"
+                            data-bs-parent="#sidebarMenu">
                             <div class="accordion-body p-0">
-                                <a href="{{ route('admin.categories.index') }}" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Danh sách danh mục">Danh sách danh mục</a>
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Thêm danh mục">Thêm danh mục</a>
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.categories.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
+                                            Danh sách danh mục
+                                        </a>
+                                    </li>
+
+                                    @if (request()->routeIs('admin.categories.create'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.categories.create') }}"
+                                                class="nav-link {{ request()->routeIs('admin.categories.create') ? 'active' : '' }}">
+                                                Thêm danh mục
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (request()->routeIs('admin.categories.edit') && request()->route('category'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.categories.edit', request()->route('category')) }}"
+                                                class="nav-link active">
+                                                Sửa danh mục
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <!-- Quản lý đơn hàng -->
-                    <div class="accordion-item bg-dark border border-secondary rounded mb-2">
+
+                    <!-- Sản phẩm -->
+                    <div class="accordion-item rounded mb-2">
                         <h2 class="accordion-header">
-                            <button class="accordion-button bg-dark text-white py-2 text-truncate w-100{{ $orderActive ? '' : ' collapsed' }}"
+                            <button
+                                class="accordion-button py-2 text-truncate w-100{{ $productActive ? '' : ' collapsed' }}"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseProduct"
+                                aria-expanded="{{ $productActive ? 'true' : 'false' }}">
+                                📦 Quản lý sản phẩm
+                            </button>
+                        </h2>
+                        <div id="collapseProduct"
+                            class="accordion-collapse collapse{{ $productActive ? ' show' : '' }}"
+                            data-bs-parent="#sidebarMenu">
+                            <div class="accordion-body p-0">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.products.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.products.index') ? 'active' : '' }}">
+                                            Danh sách sản phẩm
+                                        </a>
+                                    </li>
+
+                                    @if (request()->routeIs('admin.products.create'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.products.create') }}"
+                                                class="nav-link {{ request()->routeIs('admin.products.create') ? 'active' : '' }}">
+                                                Thêm sản phẩm
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (request()->routeIs('admin.products.edit') && request()->route('product'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.products.edit', request()->route('product')) }}"
+                                                class="nav-link active">
+                                                Sửa sản phẩm
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (request()->routeIs('admin.products.show') && request()->route('product'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.products.show', request()->route('product')) }}"
+                                                class="nav-link active">
+                                                Chi tiết sản phẩm
+                                            </a>
+                                        </li>
+                                    @endif
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.images.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.images.index') ? 'active' : '' }}">
+                                            Danh sách ảnh sản phẩm
+                                        </a>
+                                    </li>
+
+                                    @if (request()->routeIs('admin.images.create'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.images.create') }}"
+                                                class="nav-link {{ request()->routeIs('admin.images.create') ? 'active' : '' }}">
+                                                Thêm ảnh sản phẩm
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (request()->routeIs('admin.images.edit') && request()->route('image'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.images.edit', request()->route('image')) }}"
+                                                class="nav-link active">
+                                                Sửa ảnh sản phẩm
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Người dùng -->
+                    <div class="accordion-item rounded mb-2">
+                        <h2 class="accordion-header">
+                            <button
+                                class="accordion-button py-2 text-truncate w-100{{ $userActive ? '' : ' collapsed' }}"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseUser"
+                                aria-expanded="{{ $userActive ? 'true' : 'false' }}">
+                                👤 Quản lý người dùng
+                            </button>
+                        </h2>
+                        <div id="collapseUser" class="accordion-collapse collapse{{ $userActive ? ' show' : '' }}"
+                            data-bs-parent="#sidebarMenu">
+                            <div class="accordion-body p-0">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.users.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
+                                            Danh sách người dùng
+                                        </a>
+                                    </li>
+
+                                    @if (request()->routeIs('admin.users.create'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.users.create') }}"
+                                                class="nav-link {{ request()->routeIs('admin.users.create') ? 'active' : '' }}">
+                                                Thêm Admin
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (request()->routeIs('admin.users.show') && request()->route('user'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.users.show', request()->route('user')) }}"
+                                                class="nav-link active">
+                                                Chi tiết người dùng
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Voucher -->
+                    <div class="accordion-item rounded mb-2">
+                        <h2 class="accordion-header">
+                            <button
+                                class="accordion-button py-2 text-truncate w-100{{ $voucherActive ? '' : ' collapsed' }}"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseVoucher"
+                                aria-expanded="{{ $voucherActive ? 'true' : 'false' }}">
+                                🎁 Quản lý Voucher
+                            </button>
+                        </h2>
+                        <div id="collapseVoucher"
+                            class="accordion-collapse collapse{{ $voucherActive ? ' show' : '' }}"
+                            data-bs-parent="#sidebarMenu">
+                            <div class="accordion-body p-0">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.vouchers.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.vouchers.index') ? 'active' : '' }}">
+                                            Danh sách voucher
+                                        </a>
+                                    </li>
+
+                                    @if (request()->routeIs('admin.vouchers.create'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.vouchers.create') }}"
+                                                class="nav-link {{ request()->routeIs('admin.vouchers.create') ? 'active' : '' }}">
+                                                Thêm voucher
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (request()->routeIs('admin.vouchers.edit') && request()->route('voucher'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.vouchers.edit', request()->route('voucher')) }}"
+                                                class="nav-link active">
+                                                Sửa voucher
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Đơn hàng -->
+                    <div class="accordion-item rounded mb-2">
+                        <h2 class="accordion-header">
+                            <button
+                                class="accordion-button py-2 text-truncate w-100{{ $orderActive ? '' : ' collapsed' }}"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrder"
                                 aria-expanded="{{ $orderActive ? 'true' : 'false' }}">
-                                <span title="Quản lý đơn hàng">🛒 Quản lý đơn hàng</span>
+                                🛒 Quản lý đơn hàng
                             </button>
                         </h2>
-                        <div id="collapseOrder" class="accordion-collapse collapse{{ $orderActive ? ' show' : '' }}" data-bs-parent="#sidebarMenu">
+                        <div id="collapseOrder" class="accordion-collapse collapse{{ $orderActive ? ' show' : '' }}"
+                            data-bs-parent="#sidebarMenu">
                             <div class="accordion-body p-0">
-                                <a href="{{ route('admin.orders.index') }}" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Danh sách đơn hàng">Danh sách đơn hàng</a>
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Thêm đơn hàng">Thêm đơn hàng</a>
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Trạng thái đơn hàng">Trạng thái đơn hàng</a>
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.orders.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.orders.index') ? 'active' : '' }}">
+                                            Danh sách đơn hàng
+                                        </a>
+                                    </li>
+
+                                    @if (request()->routeIs('admin.orders.create'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.orders.create') }}"
+                                                class="nav-link {{ request()->routeIs('admin.orders.create') ? 'active' : '' }}">
+                                                Thêm đơn hàng
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (request()->routeIs('admin.orders.edit') && request()->route('order'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.orders.edit', request()->route('order')) }}"
+                                                class="nav-link active">
+                                                Sửa đơn hàng
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (request()->routeIs('admin.orders.show') && request()->route('order'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.orders.show', request()->route('order')) }}"
+                                                class="nav-link active">
+                                                Chi tiết đơn hàng
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <!-- Quản lý voucher -->
-                    <div class="accordion-item bg-dark border border-secondary rounded mb-2">
+
+                    <!-- Bình luận & đánh giá -->
+                    <div class="accordion-item rounded mb-2">
                         <h2 class="accordion-header">
-                            <button class="accordion-button bg-dark text-white py-2 text-truncate w-100"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseVoucher">
-                                <span title="Quản lý voucher">🎟️ Quản lý voucher</span>
+                            <button
+                                class="accordion-button py-2 w-100{{ $commentActive || $reviewActive ? '' : ' collapsed' }}"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseReview"
+                                aria-expanded="{{ $commentActive || $reviewActive ? 'true' : 'false' }}">
+                                💬 Bình luận & Đánh giá
                             </button>
                         </h2>
-                        <div id="collapseVoucher" class="accordion-collapse collapse" data-bs-parent="#sidebarMenu">
+                        <div id="collapseReview"
+                            class="accordion-collapse collapse{{ $commentActive || $reviewActive ? ' show' : '' }}"
+                            data-bs-parent="#sidebarMenu">
                             <div class="accordion-body p-0">
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Danh sách voucher">Danh sách voucher</a>
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Thêm voucher">Thêm voucher</a>
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.comments.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.comments.index') ? 'active' : '' }}">
+                                            Danh sách bình luận
+                                        </a>
+                                    </li>
+                                    @if (request()->routeIs('admin.comments.edit') && request()->route('comment'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.comments.edit', request()->route('comment')) }}"
+                                                class="nav-link active">
+                                                Sửa bình luận
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                </ul>
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.reviews.index') }}"
+                                            class="nav-link {{ request()->routeIs('admin.reviews.index') ? 'active' : '' }}">
+                                            Danh sách đánh giá
+                                        </a>
+                                    </li>
+                                    @if (request()->routeIs('admin.reviews.edit') && request()->route('review'))
+                                        <li class="nav-item acor-con">
+                                            <a href="{{ route('admin.reviews.edit', request()->route('review')) }}"
+                                                class="nav-link active">
+                                                Sửa đánh giá
+                                            </a>
+                                        </li>
+                                    @endif
                             </div>
                         </div>
                     </div>
-                    <!-- Quản lý bình luận/đánh giá -->
-                    <div class="accordion-item bg-dark border border-secondary rounded mb-2">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button bg-dark text-white py-2 text-truncate w-100"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseReview">
-                                <span title="Quản lý bình luận/đánh giá">💬 Quản lý bình luận/đánh giá</span>
-                            </button>
-                        </h2>
-                        <div id="collapseReview" class="accordion-collapse collapse" data-bs-parent="#sidebarMenu">
-                            <div class="accordion-body p-0">
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Danh sách bình luận">Danh sách bình luận</a>
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Thêm bình luận">Thêm bình luận</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Quản lý khách hàng -->
-                    <div class="accordion-item bg-dark border border-secondary rounded mb-2">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button bg-dark text-white py-2 text-truncate w-100{{ $customerActive ? '' : ' collapsed' }}"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseCustomer"
-                                aria-expanded="{{ $customerActive ? 'true' : 'false' }}">
-                                <span title="Quản lý khách hàng">🧑‍💼 Quản lý khách hàng</span>
-                            </button>
-                        </h2>
-                        <div id="collapseCustomer" class="accordion-collapse collapse{{ $customerActive ? ' show' : '' }}" data-bs-parent="#sidebarMenu">
-                            <div class="accordion-body p-0">
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Danh sách khách hàng">Danh sách khách hàng</a>
-                                <a href="#" class="d-block text-white py-2 px-4 text-decoration-none text-truncate w-100" title="Thêm khách hàng">Thêm khách hàng</a>
-                            </div>
-                        </div>
-                    </div>
+
                     @yield('sidebar')
                 </div>
             </nav>
+
             <!-- Main content -->
-            <div class="col-md-10 ms-sm-auto d-flex flex-column p-0">
+            <div class="flex-grow-1 ms-sm-auto d-flex flex-column p-0">
                 <!-- Topbar -->
                 <header class="border-bottom d-flex justify-content-between align-items-center px-4 py-2 bg-white">
-                    <button type="button" class="btn btn-primary" onclick="window.history.back();">
-                        Quay lại
-                    </button>
+                    <div>
+                        
+                    </div>
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
-                            data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle fs-4 me-2"></i>
+                            data-bs-toggle="dropdown" style="color: #E75480;">
+                            <i class="bi bi-person-circle fs-4 me-2" style="color: #E75480;"></i>
                             <span>Admin</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -202,18 +396,22 @@
                         </ul>
                     </div>
                 </header>
+
                 <!-- Main -->
                 <main class="flex-grow-1 p-4 bg-light">
                     @yield('content')
                 </main>
+
                 <!-- Footer -->
-                <footer class="text-center text-white bg-secondary py-3 small m-0">
-                    &copy; 2025 Admin Panel. All rights reserved.
+                <footer class="text-center py-3 small m-0">
+                    &copy; 2025 Mova Admin Panel. All rights reserved.
                 </footer>
             </div>
         </div>
     </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

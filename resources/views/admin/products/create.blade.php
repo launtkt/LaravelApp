@@ -3,45 +3,51 @@
 
 @section('content')
 <div class="container my-4">
-    <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
+    <h3>Thêm sản phẩm mới</h3>
+    <div class="card-pink p-3">
+
+        {{-- Thông báo lỗi --}}
+        <div class="card-body">
+           <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="row g-4">
             <!-- Cột trái -->
             <div class="col-md-6">
                 <div class="mb-3">
                     <label class="form-label">Tên sản phẩm</label>
-                    <input type="text" class="form-control" name="name" required>
+                    <input type="text" name="name" class="form-input" value="{{ old('name') }}" required>
+                    @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Danh mục</label>
+                    <select name="category_id" class="form-select" required>
+                        <option value="">-- Chọn danh mục --</option>
+                        @foreach($categories as $cat)
+                            <option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('category_id') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Giá</label>
-                    <input type="text" class="form-control" name="price" required>
+                    <input type="number" name="price" class="form-input" value="{{ old('price') }}" required>
+                    @error('price') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
-                {{-- <div class="mb-3">
-                    <label class="form-label">Mã sản phẩm</label>
-                    <input type="text" class="form-control" name="product_code" required>
-                </div> --}}
                 <div class="mb-3">
                     <label class="form-label">Số lượng</label>
-                    <input type="number" class="form-control" name="quantity" required>
+                    <input type="number" name="quantity" class="form-input" value="{{ old('quantity') }}" required>
+                    @error('quantity') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
             </div>
             <!-- Cột phải -->
             <div class="col-md-6">
                 <div class="mb-3">
-                    <label class="form-label">Danh mục</label>
-                    <select class="form-select" name="category_id" required>
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="mb-3">
                     <label class="form-label">Mô tả</label>
-                    <textarea class="form-control" name="description" rows="3"></textarea>
+                    <textarea class="form-input" name="description" rows="3">{{ old('description') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="color" class="form-label">Màu áo</label>
-                    <input type="text" name="color" class="form-control" value="{{ old('color') }}">
+                    <label class="form-label">Màu sắc</label>
+                    <input type="text" name="color" class="form-input" value="{{ old('color') }}">
                     @error('color') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
                 <div class="mb-3">
@@ -57,25 +63,33 @@
                 </div>
             </div>
         </div>
-        <!-- 4 ảnh trong 1 div, chia 2 hàng -->
-        <div class="border rounded p-3 bg-light my-4">
-            <div class="row g-3">
-                @for($i = 1; $i <= 4; $i++)
-                    <div class="col-md-6">
-                        <label for="image{{ $i }}" class="form-label">Ảnh {{ $i }}</label>
-                        <input type="file" name="image{{ $i }}" class="form-control" accept="image/*">
-                        @error('image'.$i) <small class="text-danger">{{ $message }}</small> @enderror
-
-                        @if(isset($product) && $product->{'image'.$i})
-                            <div class="mt-2">
-                                <img src="{{ asset('storage/' . $product->{'image'.$i}) }}" class="img-thumbnail" style="max-height: 180px;">
-                            </div>
-                        @endif
-                    </div>
-                @endfor
+        <!-- Chọn tối đa 4 ảnh, mỗi ảnh 1 input, chia 2 hàng 2 cột -->
+        <div class="image-upload bg-white border rounded p-3 my-4">
+            <label class="form-label">Chọn tối đa 4 ảnh sản phẩm</label>
+            <div class="row">
+                <div class="col-6 mb-2">
+                    <input type="file" name="images[]" class="form-input custom-file" accept="image/*" required>
+                    @error('images.0') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+                <div class="col-6 mb-2">
+                    <input type="file" name="images[]" class="form-input custom-file" accept="image/*">
+                    @error('images.1') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+                <div class="col-6">
+                    <input type="file" name="images[]" class="form-input custom-file" accept="image/*">
+                    @error('images.2') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+                <div class="col-6">
+                    <input type="file" name="images[]" class="form-input custom-file" accept="image/*">
+                    @error('images.3') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
             </div>
+            @error('images') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
-        <button type="submit" class="btn btn-info px-5">Thêm sản phẩm</button>
+        <button type="submit" class="btn btn-add">Thêm sản phẩm</button>
     </form>
+        </div>
+    </div>
+
 </div>
 @endsection

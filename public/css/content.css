@@ -1,0 +1,582 @@
+:root {
+--primary-color: #E75480; /* Hồng đậm */
+--accent-color: #FFD1DC;
+--accent-hover: #FFB6C1;
+--accent-bg: #E75480; /* Màu khi focus */
+--background-color: #FFF5F8; /* Nền */
+--text-main: #B71C1C; /* Màu chữ chính */
+--sidebar-bg: #FFF0F5; /* Sidebar */
+}
+
+/* Toàn trang */
+body {
+background-color: var(--background-color);
+}
+
+/* Sidebar */
+.sidebar {
+background-color: var(--sidebar-bg) !important;
+}
+.bg-custom-light {
+  background-color: 	#FFF9E5 !important;
+}
+
+/* Accordion item */
+.accordion-item {
+border-color: #f2c2d4 !important;
+}
+
+.accordion-button {
+color: var(--text-main) !important;
+background-color: var(--sidebar-bg) !important;
+}
+
+.accordion-button:not(.collapsed) {
+background-color: var(--accent-color) !important;
+font-weight: bold;
+}
+
+/* Sidebar link */
+.accordion-body a {
+color: var(--text-main) !important;
+}
+
+.accordion-body a:hover,
+.accordion-body a.active {
+background-color: var(--accent-color);
+font-weight: bold;
+}
+.active-link {
+background-color: var(--accent-color);
+font-weight: bold;
+}
+                                                                                    /* Table style */
+                                                                                    .table thead {
+                                                                                    background-color: var(--accent-color);   /* #FFD1DC - hồng nhạt */
+                                                                                    color: var(--text-main);                 /* #B71C1C - chữ hồng đậm */
+                                                                                    }
+                                                                                    .table-bordered > :not(caption) > * > * {
+                                                                                    border-color: #f9b7cf;
+                                                                                    }
+
+                                                                                    .table-hover tbody tr:hover {
+                                                                                    background-color: #ffe4ec; /* hồng sáng dịu */
+                                                                                    }
+
+                                                                                    .table-pink thead {
+                                                                                    background-color: #fce4ec;
+                                                                                    color: var(--text-main);
+                                                                                    }
+
+                                                                                    table.table > thead.table-primary > tr > th {
+                                                                                    background-color: var(--primary-color) !important;  /* #E75480 */
+                                                                                    color: white !important;
+                                                                                    box-shadow: none !important;
+                                                                                    }
+
+
+                                                                        /* Button styles */
+                                                                        .btn-action {
+                                                                        font-size: 0.8rem;
+                                                                        padding: 4px 10px;
+                                                                        border-radius: 6px;
+                                                                        border: none;
+                                                                        font-weight: 500;
+                                                                        display: inline-flex;
+                                                                        align-items: center;
+                                                                        gap: 4px;
+                                                                        transition: all 0.2s ease;
+                                                                        }
+
+                                                                        .btn-view {
+                                                                        background-color: #ffe4ec;
+                                                                        color: #d81b60;
+                                                                        }
+                                                                        .btn-view:hover {
+                                                                        background-color: #fbb6ce;
+                                                                        }
+
+                                                                        .btn-edit {
+                                                                        background-color: #e0f7fa;
+                                                                        color: #00796b;
+                                                                        }
+                                                                        .btn-edit:hover {
+                                                                        background-color: #b2ebf2;
+                                                                        }
+
+                                                                        .btn-lock {
+                                                                        background-color: #f3f4f6;
+                                                                        color: #a0aec0;
+                                                                        }
+                                                                        .btn-lock:hover {
+                                                                        background-color: #e2e8f0;
+                                                                        }
+
+                                                                        .btn-unlock {
+                                                                        background-color: #d1fae5;
+                                                                        color: #2e7d32;
+                                                                        }
+                                                                        .btn-unlock:hover {
+                                                                        background-color: #a5f3dc;
+                                                                        }
+                                                                        .btn-tim {
+                                                                        background-color: var(--accent-color);      /* #FFD1DC - hồng nhạt */
+                                                                        color: var(--text-main);                    /* #B71C1C - chữ hồng đậm */
+                                                                        padding: 6px 14px;
+                                                                        font-weight: 500;
+                                                                        border: 1px solid var(--accent-hover);      /* #FFB6C1 */
+                                                                        border-radius: 6px;
+                                                                        transition: background-color 0.2s ease;
+                                                                        }
+
+                                                                        .btn-tim:hover {
+                                                                        background-color: var(--accent-hover);      /* Hồng hover */
+                                                                        }
+
+                                                                        .btn-add {
+                                                                        background-color: var(--primary-color);     /* #E75480 - hồng đậm */
+                                                                        color: white;
+                                                                        padding: 8px 16px;
+                                                                        font-weight: 500;
+                                                                        border: none;
+                                                                        border-radius: 6px;
+                                                                        transition: background-color 0.2s ease;
+                                                                        }
+
+                                                                        .btn-add:hover {
+                                                                        background-color: #d9436e; /* hơi đậm hơn khi hover */
+                                                                        }
+                                                                        .btn-save {
+                                                                        background-color: var(--accent-bg);       /* #E75480 - hồng đậm */
+                                                                        color: white;
+                                                                        padding: 8px 16px;
+                                                                        font-weight: 500;
+                                                                        border: none;
+                                                                        border-radius: 6px;
+                                                                        transition: background-color 0.2s ease;
+                                                                        }
+
+                                                                        .btn-save:hover {
+                                                                        background-color: #d9436e;                /* hồng đậm hơn khi hover */
+                                                                        }
+                                                                        .btn-reply {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.btn-reply:hover {
+  background-color: var(--accent-hover);
+  color: white;
+}
+                                                                        /* input */
+                                                                        .form-input {
+                                                                        background-color: #fff;
+                                                                        border: 1px solid var(--accent-color);     /* #FFD1DC - hồng nhạt */
+                                                                        border-radius: 6px;
+                                                                        padding: 8px 12px;
+                                                                        font-size: 0.9rem;
+                                                                        color: var(--text-main);                   /* #B71C1C */
+                                                                        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+                                                                        width: 100%;
+                                                                        }
+
+                                                                        .form-input:focus {
+                                                                        border-color: var(--accent-bg);           /* #E75480 */
+                                                                        box-shadow: 0 0 0 0.2rem rgba(231, 84, 128, 0.25);
+                                                                        outline: none;
+                                                                        }
+
+                                                                            /*Select */
+                                                                            .form-select {
+                                                                            background-color: #fff0f5;                  /* hồng nhạt */
+                                                                            border: 1px solid var(--accent-color);      /* #FFD1DC */
+                                                                            color: var(--text-main);                    /* #B71C1C */
+                                                                            font-weight: 500;
+                                                                            border-radius: 6px;
+                                                                            padding: 0.5rem 0.75rem;
+                                                                            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                                                                            font-size: 0.9rem;
+                                                                            }
+
+                                                                            .form-select:focus {
+                                                                            border-color: var(--accent-bg);             /* #E75480 */
+                                                                            box-shadow: 0 0 0 0.2rem rgba(231, 84, 128, 0.25);
+                                                                            outline: none;
+                                                                            }
+
+                                                                            .form-select option {
+                                                                            background-color: #fff;
+                                                                            color: var(--text-main);
+                                                                            }
+
+/* Custom button class */
+.btn-mova {
+background-color: var(--primary-color);
+color: white;
+border: none;
+}
+
+.btn-mova:hover {
+background-color: #d9436e;
+color: white;
+}
+
+/* Footer */
+footer {
+background-color: var(--primary-color);
+color: white;
+}
+.breadcrumb a {
+color: #E75480; /* Màu hồng Mova */
+font-weight: 500;
+text-decoration: none;
+}
+table.table > thead.table-primary > tr > th {
+background-color:#E75480 !important; /* màu hồng */
+color: white !important;
+box-shadow: none !important; /* xoá bóng để không che background */
+}
+.table-hover tbody tr:hover {
+background-color: #ffe4ec;
+}
+.form-select {
+background-color: #fff0f5; /* nền hồng nhạt */
+border: 1px solid #f9b7cf;
+color: #B71C1C;
+font-weight: 500;
+padding: 0.5rem 0.75rem;
+transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-select:focus {
+border-color: #e75480;
+box-shadow: 0 0 0 0.2rem rgba(231, 84, 128, 0.25);
+outline: none;
+}
+
+.form-select option {
+background-color: #fff;
+color: #B71C1C;
+}
+h3 {
+color: #B71C1C; /* Màu hồng Mova */
+font-weight: 500;
+}
+.nav-tabs .nav-link {
+color: #B71C1C;
+background-color: #fff0f5;
+border: 1px solid transparent;
+margin-right: 4px;
+border-radius: 0.5rem 0.5rem 0 0;
+font-weight: 500;
+}
+
+.nav-tabs .nav-link:hover {
+background-color: #fce4ec;
+border-color: #f9b7cf;
+}
+
+.nav-tabs .nav-link.active {
+background-color: #f9b7cf;
+color: #B71C1C;
+border-color: #f9b7cf #f9b7cf #fff;
+font-weight: bold;
+}
+.seller-reply {
+background-color: #fce4ec; /* hồng nhạt nhẹ nhàng */
+border-left: 4px solid #e91e63; /* hồng đậm */
+border-radius: 0.5rem;
+padding: 1rem;
+font-size: 0.95rem;
+color: #333;
+}
+
+.seller-reply strong {
+color: #d81b60;
+font-weight: 600;
+}
+
+.seller-reply p {
+margin-bottom: 0;
+white-space: pre-line;
+}
+.acor-con
+{
+text-align: end;
+}
+.bg-soft-pink {
+background-color: #fff0f5 !important;
+}
+
+.text-primary-pink {
+color: #B71C1C !important; /* đỏ hồng */
+}
+
+.border-pink {
+border-color: #f8bbd0 !important;
+}
+
+.table-pink thead {
+background-color: #fce4ec;
+color: #B71C1C;
+}
+
+                                                        /* card */
+                                                        .card-pink {
+                                                        border: 1px solid #f8bbd0;
+                                                        border-radius: 0.5rem;
+                                                        background-color: #fff0f5;
+                                                        box-shadow: 0 2px 6px rgba(231, 84, 128, 0.05);
+                                                        }
+                                                        .card-pink .card-header {
+                                                        background-color: #fce4ec;
+                                                        color: #B71C1C;
+                                                        font-weight: 600;
+                                                        border-bottom: 1px solid #f8bbd0;
+                                                        }
+                                                        .card-pink .card-body {
+                                                        color: #333;
+                                                        }
+                                                        .card {
+                                                        background-color: #fff0f5; /* nền hồng rất nhạt */
+                                                        border: 1px solid #f8bbd0;
+                                                        border-radius: 1rem;
+                                                        }
+
+                                                        .custom-file {
+                                                        border: 1px dashed #f9b7cf;
+                                                        background-color: #fff;
+                                                        padding: 10px;
+                                                        border-radius: 0.5rem;
+                                                        font-size: 0.9rem;
+                                                        color: var(--text-main);
+                                                        transition: border-color 0.3s ease-in-out;
+                                                        }
+
+                                                        .custom-file:focus {
+                                                        border-color: var(--primary-color);
+                                                        box-shadow: 0 0 0 0.2rem rgba(231, 84, 128, 0.25);
+                                                        outline: none;
+                                                        }
+
+
+
+.custom-dropdown {
+position: relative;
+width: 100%;
+}
+
+.dropdown-toggle {
+width: 100%;
+padding: 8px 12px;
+border: 1px solid var(--accent-color);
+border-radius: 8px;
+background-color: #fff;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: 0.3s;
+}
+
+.dropdown-menu {
+display: none;
+position: absolute;
+top: 100%;
+left: 0;
+width: 100%;
+max-height: 300px;
+overflow-y: auto;
+border: 1px solid var(--accent-color);
+background-color: #fff;
+border-radius: 8px;
+z-index: 9999;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+padding: 8px 12px;
+cursor: pointer;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+transition: background-color 0.2s;
+}
+
+.dropdown-item:hover,
+.dropdown-item.active {
+background-color: var(--accent-bg);
+font-weight: 500;
+}
+.status-dropdown {
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 6px 12px;
+    background-color: white;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.status-dropdown:focus {
+    border-color: var(--accent-hover);
+    background-color: var(--accent-bg);
+    box-shadow: 0 0 0 0.2rem rgba(255, 182, 193, 0.25);
+    outline: none;
+}
+/* status */
+.status-active {
+  background-color: #ffe4ec;                /* Hồng sáng pastel */
+  color: #d81b60;                           /* Hồng đậm tươi tắn hơn */
+  padding: 6px 12px;
+  border: 1px solid #f8bbd0;               /* Viền nhẹ cùng tông */
+  border-radius: 20px;                     /* Bo tròn mềm hơn */
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-locked {
+  background-color: #f3f4f6;                /* Xám sáng */
+  color: #a0aec0;                           /* Xám chữ dịu */
+  padding: 6px 12px;
+  border: 1px dashed #cbd5e1;              /* Viền nét đứt biểu thị bị khóa */
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+                                                                                            /* status order */
+                                                                                            .status-label {
+                                                                                            padding: 6px 12px;
+                                                                                            font-size: 0.8rem;
+                                                                                            font-weight: 500;
+                                                                                            border-radius: 20px;
+                                                                                            display: inline-block;
+                                                                                            }
+
+                                                                                            /* Trạng thái cụ thể */
+                                                                                            .status-pending {
+                                                                                            background-color: #fff3cd;
+                                                                                            color: #856404;
+                                                                                            border: 1px solid #ffeeba;
+                                                                                            }
+
+                                                                                            .status-confirmed {
+                                                                                            background-color: #d1ecf1;
+                                                                                            color: #0c5460;
+                                                                                            border: 1px solid #bee5eb;
+                                                                                            }
+
+                                                                                            .status-processing {
+                                                                                            background-color: #e6e0ff;
+                                                                                            color: #5f3dc4;
+                                                                                            border: 1px solid #c5b3ff;
+                                                                                            }
+
+                                                                                            .status-shipping {
+                                                                                            background-color: #d4edda;
+                                                                                            color: #155724;
+                                                                                            border: 1px solid #c3e6cb;
+                                                                                            }
+
+                                                                                            .status-delivered {
+                                                                                            background-color: #ffe4ec;
+                                                                                            color: #d81b60;
+                                                                                            border: 1px solid #f8bbd0;
+                                                                                            }
+
+                                                                                            .status-cancelled {
+                                                                                            background-color: #f1f1f1;
+                                                                                            color: #6c757d;
+                                                                                            border: 1px dashed #ced4da;
+                                                                                            }
+
+                                                                                            .status-returned {
+                                                                                            background-color: #f8d7da;
+                                                                                            color: #721c24;
+                                                                                            border: 1px solid #f5c6cb;
+                                                                                            }
+                                                                                                    /* Trạng thái đơn hàng */
+                                                                                                    .status-label {
+                                                                                                    padding: 6px 12px;
+                                                                                                    font-size: 0.8rem;
+                                                                                                    font-weight: 500;
+                                                                                                    border-radius: 20px;
+                                                                                                    display: inline-block;
+                                                                                                    }
+
+                                                                                                    .stock-in {
+                                                                                                    background-color: #d4edda;    /* xanh lá nhạt */
+                                                                                                    color: #155724;
+                                                                                                    border: 1px solid #c3e6cb;
+                                                                                                    }
+
+                                                                                                    .stock-low {
+                                                                                                    background-color: #fff3cd;    /* vàng nhạt */
+                                                                                                    color: #856404;
+                                                                                                    border: 1px solid #ffeeba;
+                                                                                                    }
+
+                                                                                                    .stock-out {
+                                                                                                    background-color: #f8d7da;    /* đỏ nhạt */
+                                                                                                    color: #721c24;
+                                                                                                    border: 1px solid #f5c6cb;
+                                                                                                    }
+
+                                                                                                            /* Input check */
+                                                                                                    .form-check-input {
+                                                                                                        border-color: var(--accent-color); /* hồng nhạt */
+                                                                                                        }
+
+                                                                                                        .form-check-input:checked {
+                                                                                                        background-color: var(--primary-color); /* hồng đậm */
+                                                                                                        border-color: var(--primary-color);
+                                                                                                        }
+
+                                                                                                        .form-check-label {
+                                                                                                        font-size: 0.9rem;
+                                                                                                        color: var(--text-main);
+                                                                                                        }
+                                                                                                        .pagination {
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.page-item .page-link {
+  color: var(--primary-color);
+  border-radius: 6px;
+  border: 1px solid #f9b7cf;
+  background-color: #fff0f5;
+  padding: 6px 12px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.page-item.active .page-link {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.page-item.disabled .page-link {
+  color: #ccc;
+  background-color: #f5f5f5;
+  border-color: #eee;
+}
+
+.bg-role-admin {
+  background-color: #fce4ec !important; /* Hồng nhạt */
+  color: #B71C1C;
+}
+
+.bg-role-customer {
+  background-color: #e0f7fa !important; /* Xanh nhạt */
+  color: #00796b;
+}
+
